@@ -48,7 +48,7 @@
                 Jayrock 0.9 now!</a></li>
             <li><a href="http://groups.google.com/group/jayrock">Discuss Jayrock</a></li>
             <li><a href="ftp://ftp.berlios.de/pub/jayrock">Latest daily/developer build</a></li>
-            <li><a href="http://code.google.com/feeds/p/jayrock/svnchanges/basic">Commits Feed</a>, <a href="http://jayrock.berlios.de/coverage-report.html">Code coverage report</a></li>
+            <li><a href="http://code.google.com/feeds/p/jayrock/hgchanges/basic">Commits Feed</a>, <a href="http://jayrock.berlios.de/coverage-report.html">Code coverage report</a></li>
             <li><a href="http://code.google.com/p/jayrock/">Project foundry @ Google Code</a>, <a href="http://www.ohloh.net/projects/jayrock">Ohloh Metrics</a></li>
         </ul>
         <p>
@@ -79,20 +79,18 @@
         <h1>
             <a id="get-source" name="get-source">Where is the Source, Luke?</a></h1>
         <p>
-            You can obtain the latest source of code of Jayrock from the <a href="http://subversion.tigris.org/">
-                Subversion</a> repository <a href="http://code.google.com/hosting/">hosted at Google Code</a>.
-            Needless to say, you will need a <a href="http://subversion.tigris.org/project_packages.html">
-                Subversion client</a> for your platform (Windows users may also want to check
-            out <a href="http://tortoisesvn.tigris.org/">TortoiseSVN</a>, which is a Windows
-            Shell Extension for Subversion) to access the repository. If you don't have a Subversion
+            You can obtain the latest source of code of Jayrock from the 
+            <a href="http://mercurial.selenic.com/">Mercurial</a> repository <a href="http://code.google.com/hosting/">hosted at Google Code</a>.
+            Needless to say, you will need a <a href="http://mercurial.selenic.com/downloads/">Mercurial 
+            client</a> for your platform to access the repository. If you don't have a Mercurial
             client handy and just wish to <a href="http://code.google.com/p/jayrock/source/browse/">browse 
             the source code, you can do so online</a>.</p>
         <p>
-            For anonymous access to the respository trunk, use 
-            <code><a href="http://jayrock.googlecode.com/svn/trunk/">http://jayrock.googlecode.com/svn/trunk/</a></code>.
-            The command-line for the Subversion client would therefore be:</p>
+            The respository is located at
+            <code><a href="http://jayrock.googlecode.com/hg/">http://jayrock.googlecode.com/hg/</a></code>.
+            The command-line for the Mercurial client would therefore be:</p>
         <p>
-            <code>svn checkout http://jayrock.googlecode.com/svn/trunk/ jayrock</code></p>
+            <code>hg clone http://jayrock.googlecode.com/hg/ jayrock</code></p>
         <p>
             The third argument, <code>jayrock</code>, is the directory name where the local
             working copy will be downloaded so this can be another name if you like.</p>
@@ -101,6 +99,11 @@
             repository then you can simply download them from the <a href="http://developer.berlios.de/project/showfiles.php?group_id=4638">
                 Files</a> section of the project.
         </p>
+        <p>
+            Jayrock was originally maintained in a <a href="http://jayrock.googlecode.com/svn/">Subversion repository</a>
+            that is still available in case you want to consult its earlier history
+            using <a href="http://subversion.apache.org/packages.html">Subversion clients</a>.
+        </p>        
         <h2>
             <a id="search" name="search">Search the Source</a></h2>
         <form method="get" action="http://www.google.com/codesearch">
@@ -114,7 +117,7 @@
         <p>
             Bear in mind that search engine(s) maintain a periodically crawled and cached copy of the source 
             code so results may be inaccurate sometimes due to differences from 
-            <a href="http://jayrock.googlecode.com/svn/trunk/">the original</a>.
+            <a href="http://jayrock.googlecode.com/hg/">the original</a>.
         </p>
         <h1>
             <a id="compiling" name="compiling">Compiling</a></h1>
