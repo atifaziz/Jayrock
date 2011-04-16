@@ -337,6 +337,7 @@
     <Compile Include="Json\EmptyJsonWriter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\FreeJsonMemberReadingHelper.cs" />
     <Compile Include="Json\InvalidMemberException.cs">
       <SubType>Code</SubType>
     </Compile>
