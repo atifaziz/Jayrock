@@ -28,7 +28,6 @@ namespace Jayrock.Json.Conversion.Converters
     using System.Diagnostics;
     using System.Globalization;
     using System.Text.RegularExpressions;
-    using System.Xml;
 
     #endregion
 
@@ -51,8 +50,10 @@ namespace Jayrock.Json.Conversion.Converters
                 // have elapsed since midnight 01 January, 1970 UTC.
                 // See also: http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx
                 //
-
-                Match match = Regex.Match(reader.Text, @"\A \/ Date \( ([0-9]+) \) \/ \z",
+                // TODO: MS Ajax format requires the slashes to be escaped, but we have no information here whether
+                //       any characters were escaped.  So we have to assume they were.  Given that we wouldn't be in
+                //       this importer unless we expected a DateTime, it's probably safe enough.
+                Match match = Regex.Match(reader.Text, @"\A / Date \( (-?[0-9]+) \) / \z",
                                   RegexOptions.IgnorePatternWhitespace
                                   | RegexOptions.IgnoreCase
                                   | RegexOptions.CultureInvariant);
@@ -76,11 +77,7 @@ namespace Jayrock.Json.Conversion.Converters
                     return ReadReturning(reader, time);
                 }
 
-                return ReadReturning(reader, XmlConvert.ToDateTime(reader.Text
-                            #if !NET_1_0 && !NET_1_1
-                            , XmlDateTimeSerializationMode.Local
-                            #endif
-                            ));
+                return ReadReturning(reader, DateTime.Parse(reader.Text, CultureInfo.InvariantCulture));
             }
             catch (FormatException e)
             {
