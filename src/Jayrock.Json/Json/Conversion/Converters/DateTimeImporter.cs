@@ -66,7 +66,7 @@ namespace Jayrock.Json.Conversion.Converters
                     {
                         GroupCollection groups = match.Groups;
 
-                        long ms = long.Parse(groups[1].Value, NumberStyles.None, CultureInfo.InvariantCulture);
+                        long ms = long.Parse(groups[1].Value, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
                         time = UnixTime.ToDateTime(ms / 1000.0);
                     }
                     catch (OverflowException e)

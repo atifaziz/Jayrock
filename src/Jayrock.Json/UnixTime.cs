@@ -76,8 +76,21 @@ namespace Jayrock
 
         public static DateTime ToDateTime(long time, int ms)
         {
-            if (ms < 0 || ms > 999)
-                throw new ArgumentOutOfRangeException("ms");
+            if (time > 0)
+            {
+                if (ms < 0 || ms > 999)
+                    throw new ArgumentOutOfRangeException("ms");
+            }
+            else if (time < 0)
+            {
+                if (ms < -999 || ms > 0)
+                    throw new ArgumentOutOfRangeException("ms");
+            }
+            else
+            {
+                if (ms < -999 || ms > 999)
+                    throw new ArgumentOutOfRangeException("ms");
+            }
 
             return EpochUtc.AddSeconds(time).AddMilliseconds(ms).ToLocalTime();
         }

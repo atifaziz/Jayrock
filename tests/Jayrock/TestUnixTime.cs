@@ -67,21 +67,43 @@ namespace Jayrock
 
             Assert.AreEqual(u1, UnixTime.ToDouble(t1.ToLocalTime()), 0.0001);
             Assert.AreEqual(u2, UnixTime.ToDouble(t2.ToLocalTime()), 0.0001);
+
+            Assert.AreEqual(new DateTime(1098, 7, 6, 5, 43, 21, 234), UnixTime.ToDateTime(-27501531398.766).ToUniversalTime());
+            Assert.AreEqual(UnixTime.EpochUtc.AddMilliseconds(+123), UnixTime.ToDateTime(0, +123).ToUniversalTime());
+            Assert.AreEqual(UnixTime.EpochUtc.AddMilliseconds(-123), UnixTime.ToDateTime(0, -123).ToUniversalTime());
         }
 
         [ Test, ExpectedException(typeof(ArgumentOutOfRangeException)) ]
-        public void CannotSpecifyNegativeMilliseconds()
+        public void CannotSpecifyPositiveTimeWithNegativeMilliseconds()
         {
-            UnixTime.ToDateTime(0, -1);
+            UnixTime.ToDateTime(123, -456);
         }
- 
+
         [ Test, ExpectedException(typeof(ArgumentOutOfRangeException)) ]
+        public void CannotSpecifyNegativeTimeWithPositiveMilliseconds()
+        {
+            UnixTime.ToDateTime(-123, 456);
+        }
+
+        [ Test ]
+        public void Negative()
+        {
+            Assert.AreEqual(new DateTime(1098, 7, 6, 5, 43, 21, 234), UnixTime.ToDateTime(-27501531398, -766).ToUniversalTime());
+        }
+
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CannotOverflowMilliseconds()
         {
             UnixTime.ToDateTime(0, 1000);
         }
 
-        [ Test ]
+        [ Test, ExpectedException(typeof(ArgumentOutOfRangeException)) ]
+        public void CannotOverflowNegativeMilliseconds()
+        {
+            UnixTime.ToDateTime(0, -1000);
+        }
+
+        [Test]
         public void Maximum()
         {
             Assert.AreEqual(new DateTime(3000, 12, 31, 23, 59, 59),

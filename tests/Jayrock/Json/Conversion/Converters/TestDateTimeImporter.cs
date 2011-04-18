@@ -53,9 +53,21 @@ namespace Jayrock.Json.Conversion.Converters
         }
 
         [ Test ]
+        public void ImportNegativeNumber()
+        {
+            AssertImport(new DateTime(1098, 7, 6, 5, 43, 21), "-27501531399", true);
+        }
+
+        [ Test ]
         public void ImportFractionalNumber()
         {
             AssertImport(new DateTime(2006, 7, 17, 10, 56, 56, 456), "1153133816.456", true);
+        }
+
+        [ Test ]
+        public void ImportNegativeFractionalNumber()
+        {
+            AssertImport(new DateTime(1098, 7, 6, 5, 43, 21, 234), "-27501531398.766", true);
         }
 
         [ Test, ExpectedException(typeof(JsonException)) ]
@@ -98,12 +110,14 @@ namespace Jayrock.Json.Conversion.Converters
         public void ImportMicrosoftAjaxFormat()
         {
             AssertImport(new DateTime(2006, 7, 17, 10, 56, 56, 456), @"'\/Date(1153133816456)\/'", true);
+            AssertImport(new DateTime(1098, 7, 06, 05, 43, 21, 234), @"'\/Date(-27501531398766)\/'", true);
         }
 
         [ Test ]
         public void ImportMicrosoftAjaxFormatWithUpperCase()
         {
             AssertImport(new DateTime(2006, 7, 17, 10, 56, 56, 456), @"'\/DATE(1153133816456)\/'", true);
+            AssertImport(new DateTime(1098, 7, 06, 05, 43, 21, 234), @"'\/DATE(-27501531398766)\/'", true);
         }
 
         [ Test, ExpectedException(typeof(JsonException)) ]
