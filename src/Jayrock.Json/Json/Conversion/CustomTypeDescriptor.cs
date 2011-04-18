@@ -224,7 +224,7 @@ namespace Jayrock.Json.Conversion
         /// Note also that we take a "duck" approach to look for the 
         /// CompilerGenerated attribute under .NET Framework 1.x, which does 
         /// not seem like an appaling idea considering that the C# compiler 
-        /// does the with ExtensionAttribute when it comes to extension 
+        /// does the same with ExtensionAttribute when it comes to extension 
         /// methods.
         /// </remarks>
         ///
