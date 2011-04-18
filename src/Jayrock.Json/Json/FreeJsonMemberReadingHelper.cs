@@ -45,7 +45,7 @@ namespace Jayrock.Json
     /// the underlying JSON data is tokenized and yielded sequentially.
     /// When reading a JSON object, members must be processed in the order 
     /// in which they are yielded by the underlying reader. If an 
-    /// application requires somes members of a JSON object to correctly
+    /// application requires some members of a JSON object to correctly
     /// process the remaining members then those member may need to be read 
     /// in advance to prepare for further processing. For example, suppose
     /// the JSON object <c>{ "type": "date", "format": "M/d/yyyy", "value": "5/5/2008" }</c>
@@ -69,7 +69,7 @@ namespace Jayrock.Json
     /// also-buffered <c>value</c> member. This is where 
     /// <see cref="FreeJsonMemberReadingHelper"/> can help tremendously.
     /// The application can call its <see cref="ReadMember"/> method to
-    /// read members the natural order of processing (e.g., <c>type</c>,
+    /// read members in the natural order of processing (e.g., <c>type</c>,
     /// <c>format</c> and <c>value</c>) rather than how they have been 
     /// actually ordered by some source. <see cref="FreeJsonMemberReadingHelper"/>
     /// will buffer or stream from the underlying <see cref="JsonReader"/>
@@ -119,7 +119,7 @@ namespace Jayrock.Json
 
         /// <summary>
         /// Gets a reader than can be used to read remaining members,
-        /// which could included buffered and non-buffered members.
+        /// which could include buffered and non-buffered members.
         /// </summary>
 
         public JsonReader GetTailReader()
@@ -160,7 +160,7 @@ namespace Jayrock.Json
         /// <summary>
         /// Attempts to locate a member with a given (case-sensitive) name 
         /// and returns a <see cref="JsonReader"/> that can be used to read 
-        /// the value. Otherwise it return <c>null</c>.
+        /// the value. Otherwise it returns <c>null</c>.
         /// </summary>
         /// <remarks>
         /// The caller should not use the returned <see cref="JsonReader"/>
