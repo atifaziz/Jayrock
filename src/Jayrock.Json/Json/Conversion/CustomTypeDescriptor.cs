@@ -70,6 +70,9 @@ namespace Jayrock.Json.Conversion
             if (type == null) 
                 throw new ArgumentNullException("type");
 
+            // TODO Remove dependency on JsonIgnore & JsonExport
+            // This class should not have any JSON specifics.
+
             //
             // No members supplied? Get all public, instance-level fields and 
             // properties of the type that are not marked with the JsonIgnore
