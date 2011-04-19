@@ -244,7 +244,7 @@ namespace Jayrock.Services
                     if (ch1 >= '0' && ch1 <= '9' &&
                         ch2 >= '0' && ch2 <= '9')
                     {
-                        position = int.Parse(name, NumberStyles.Number, CultureInfo.InvariantCulture);
+                        position = int.Parse(name, NumberStyles.Integer, CultureInfo.InvariantCulture);
                     
                         if (position < _parameters.Length)
                             mapped[position] = arg;

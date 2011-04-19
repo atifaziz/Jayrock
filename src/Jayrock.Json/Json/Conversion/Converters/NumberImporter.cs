@@ -149,7 +149,7 @@ namespace Jayrock.Json.Conversion.Converters
 
         protected override object ConvertFromString(string s)
         {
-            return decimal.Parse(s, NumberStyles.Number | NumberStyles.Float, CultureInfo.InvariantCulture);
+            return decimal.Parse(s, NumberStyles.Float, CultureInfo.InvariantCulture);
         }
     }
 }
