@@ -33,6 +33,22 @@ namespace Jayrock.Json.Conversion.Converters
 
     public class DateTimeImporter : ImporterBase
     {
+        private static readonly string[] _formats = new string[] 
+        { 
+            "yyyy-MM-dd'T'HH:mm:ss.fffffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.fzzz", 
+            "yyyy-MM-dd'T'HH:mm:sszzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffffffffzzz", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffffffzzz",
+            "yyyy-MM-dd", 
+        };
+
         public DateTimeImporter() : 
             base(typeof(DateTime)) {}
         
@@ -77,7 +93,7 @@ namespace Jayrock.Json.Conversion.Converters
                     return ReadReturning(reader, time);
                 }
 
-                return ReadReturning(reader, DateTime.Parse(reader.Text, CultureInfo.InvariantCulture));
+                return ReadReturning(reader, DateTime.ParseExact(reader.Text, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None));
             }
             catch (FormatException e)
             {
