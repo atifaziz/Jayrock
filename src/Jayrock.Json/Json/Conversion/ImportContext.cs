@@ -155,7 +155,7 @@ namespace Jayrock.Json.Conversion
             Type genericDictionaryType = Reflector.FindConstructionOfGenericInterfaceDefinition(type, typeof(IDictionary<,>));
             if (genericDictionaryType != null)
             {
-                var args2 = genericDictionaryType.GetGenericArguments();
+                Type[] args2 = genericDictionaryType.GetGenericArguments();
                 Debug.Assert(args2.Length == 2);
                 Type[] args3 = new Type[3];
                 args3[0] = type;        // [ TDictionary, ... , ...    ]
