@@ -25,6 +25,7 @@ namespace Jayrock.Reflection
     #region Imports
 
     using System;
+    using System.Reflection;
 
     #endregion
 
@@ -74,6 +75,30 @@ namespace Jayrock.Reflection
             return type.IsGenericType
                 && !type.IsGenericTypeDefinition
                 && type.GetGenericTypeDefinition() == genericTypeDefinition;
+        }
+
+        /// <summary>
+        /// Finds and returns the constructed type of an interface 
+        /// generic type definition if the type implements it. Otherwise
+        /// returns a <c>null</c> reference.
+        /// </summary>
+        /// <exception cref="System.ArgumentNullException">
+        /// Either <paramref name="type"/> or <paramref name="genericTypeDefinition"/> 
+        /// is a null reference.
+        /// </exception>
+
+        internal static Type FindConstructionOfGenericInterfaceDefinition(Type type, Type genericTypeDefinition)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            if (genericTypeDefinition == null) throw new ArgumentNullException("genericTypeDefinition");
+
+            Type[] interfaces = type.FindInterfaces(new TypeFilter(IsConstructionOfGenericInterfaceDefinition), genericTypeDefinition);
+            return interfaces.Length == 0 ? null : interfaces[0];
+        }
+
+        private static bool IsConstructionOfGenericInterfaceDefinition(Type type, object criteria)
+        {
+            return IsConstructionOfGenericTypeDefinition(type, (Type) criteria);
         }
 
         #endif // !NET_1_0 && !NET_1_1 

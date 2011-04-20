@@ -28,7 +28,6 @@ namespace Jayrock.Json.Conversion
     using System.Collections;
     using System.Configuration;
     using System.Diagnostics;
-    using System.Threading;
     using Jayrock.Json.Conversion.Converters;
     using Jayrock.Reflection;
     #if !NET_1_0 && !NET_1_1
@@ -153,7 +152,18 @@ namespace Jayrock.Json.Conversion
             if (Reflector.IsConstructionOfGenericTypeDefinition(type, typeof(IDictionary<,>)))
                 return (IImporter) Activator.CreateInstance(typeof(DictionaryImporter<,>).MakeGenericType(type.GetGenericArguments()));
 
-            #endif
+            Type genericDictionaryType = Reflector.FindConstructionOfGenericInterfaceDefinition(type, typeof(IDictionary<,>));
+            if (genericDictionaryType != null)
+            {
+                var args2 = genericDictionaryType.GetGenericArguments();
+                Debug.Assert(args2.Length == 2);
+                Type[] args3 = new Type[3];
+                args3[0] = type;        // [ TDictionary, ... , ...    ]
+                args2.CopyTo(args3, 1); // [ TDictionary, TKey, TValue ]
+                return (IImporter)Activator.CreateInstance(typeof(DictionaryImporter<,,>).MakeGenericType(args3));
+            }
+
+            #endif // !NET_1_0 && !NET_1_1 
             
             #if !NET_1_0 && !NET_1_1 && !NET_2_0
 

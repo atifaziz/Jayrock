@@ -48,7 +48,10 @@ namespace Jayrock.Json.Conversion.Converters
     public class DictionaryImporter<TKey, TValue> : ImporterBase
     {
         public DictionaryImporter() :
-            base(typeof(IDictionary<TKey, TValue>)) { }
+            this(typeof(IDictionary<TKey, TValue>)) { }
+
+        protected DictionaryImporter(Type outputType) :
+            base(outputType) { }
 
         protected override object ImportFromObject(ImportContext context, JsonReader reader)
         {
@@ -84,7 +87,7 @@ namespace Jayrock.Json.Conversion.Converters
             return ReadReturning(reader, dictionary);
         }
 
-        protected virtual Dictionary<TKey, TValue> CreateDictionary()
+        protected virtual IDictionary<TKey, TValue> CreateDictionary()
         {
             IEqualityComparer<TKey> comparer = IsKeyOfString 
                 ? (IEqualityComparer<TKey>) StringComparer.Ordinal 
@@ -96,6 +99,19 @@ namespace Jayrock.Json.Conversion.Converters
         private static bool IsKeyOfString
         {
             get { return Type.GetTypeCode(typeof(TKey)) == TypeCode.String; }
+        }
+    }
+
+    internal sealed class DictionaryImporter<TDictionary, TKey, TValue> : 
+        DictionaryImporter<TKey, TValue>
+        where TDictionary : IDictionary<TKey, TValue>, new()
+    {
+        public DictionaryImporter() : 
+            base(typeof(TDictionary)) {}
+
+        protected override IDictionary<TKey, TValue> CreateDictionary()
+        {
+            return new TDictionary();
         }
     }
 
