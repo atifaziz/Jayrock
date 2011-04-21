@@ -205,11 +205,11 @@ namespace Jayrock.Tests.Json.Conversion
         }
 
         [Test]
-        public void StructTypeWithDefaultConstructorConstruction()
+        public void ValueTypeWithDefaultConstructorConstruction()
         {
-            ObjectConstructor constructor = new ObjectConstructor(typeof(StructThing));
+            ObjectConstructor constructor = new ObjectConstructor(typeof(ValueThing));
             ObjectConstructionResult result = constructor.CreateObject(new ImportContext(), JsonText.CreateReader("{foo:bar}"));
-            Assert.IsInstanceOfType(typeof(StructThing), result.Object);
+            Assert.IsInstanceOfType(typeof(ValueThing), result.Object);
             JsonReader tail = result.TailReader;
             tail.ReadToken(JsonTokenClass.Object);
             Assert.AreEqual("foo", tail.ReadMember());
@@ -217,6 +217,6 @@ namespace Jayrock.Tests.Json.Conversion
             tail.ReadToken(JsonTokenClass.EndObject);
         }
 
-        struct StructThing {}
+        struct ValueThing {}
     }
 }
