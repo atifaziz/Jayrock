@@ -114,5 +114,20 @@ namespace Jayrock.Json
             Assert.AreEqual("(anonymous): \"foo\"", 
                 new NamedJsonBuffer(string.Empty, JsonBuffer.From("foo")).ToString());
         }
+ 
+        [Test]
+        public void ToObject()
+        {
+            JsonBuffer obj = NamedJsonBuffer.ToObject(
+                new NamedJsonBuffer("foo", JsonBuffer.From("bar")),
+                new NamedJsonBuffer("qux", JsonBuffer.From("quux")));
+            Assert.AreEqual(6, obj.Length);
+            Assert.AreEqual(JsonToken.Object(), obj[0]);
+            Assert.AreEqual(JsonToken.Member("foo"), obj[1]);
+            Assert.AreEqual(JsonToken.String("bar"), obj[2]);
+            Assert.AreEqual(JsonToken.Member("qux"), obj[3]);
+            Assert.AreEqual(JsonToken.String("quux"), obj[4]);
+            Assert.AreEqual(JsonToken.EndObject(), obj[5]);
+        }
     }
 }
