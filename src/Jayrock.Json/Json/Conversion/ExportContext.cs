@@ -140,19 +140,9 @@ namespace Jayrock.Json.Conversion
             
             if ((type.IsPublic || type.IsNestedPublic) &&
                 !type.IsPrimitive && !type.IsEnum &&
-                (type.IsValueType || type.GetConstructor(Type.EmptyTypes) != null))
+                (type.IsValueType || type.GetConstructors().Length > 0))
             {
-                if (type.IsValueType)
-                {
-                    CustomTypeDescriptor descriptor = new CustomTypeDescriptor(type);
-                
-                    if (descriptor.GetProperties().Count > 0)
-                        return new ComponentExporter(type, descriptor);
-                }
-                else
-                {
-                    return new ComponentExporter(type);
-                }
+                return new ComponentExporter(type);
             }
 
             CustomTypeDescriptor anonymousClass = CustomTypeDescriptor.TryCreateForAnonymousClass(type);
@@ -222,6 +212,8 @@ namespace Jayrock.Json.Conversion
                     exporters.Add(new DataRowExporter());
                     exporters.Add(new DbDataRecordExporter());
                     exporters.Add(new ControlExporter());
+                    exporters.Add(new StringExporter(typeof(Uri)));
+                    exporters.Add(new StringExporter(typeof(Guid)));
 
                     #if !NET_1_0 && !NET_1_1 && !NET_2_0
 
