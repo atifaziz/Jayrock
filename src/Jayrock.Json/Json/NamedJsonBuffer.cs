@@ -78,7 +78,7 @@ namespace Jayrock.Json
                 throw new ArgumentNullException("members");
 
             if (members.Length == 0)
-                return Conversion.StockJsonBuffers.EmptyObject;
+                return StockJsonBuffers.EmptyObject;
 
             JsonBufferWriter writer = new JsonBufferWriter();
             writer.WriteStartObject();

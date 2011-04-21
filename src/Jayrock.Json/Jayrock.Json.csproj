@@ -339,7 +339,6 @@
     <Compile Include="Json\Conversion\PropertyCustomization.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Json\Conversion\StockJsonBuffers.cs" />
     <Compile Include="Json\EmptyJsonWriter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -409,6 +408,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Json\NamedJsonBuffer.cs" />
+    <Compile Include="Json\StockJsonBuffers.cs" />
     <Compile Include="Reflection\Reflector.cs" />
     <Compile Include="TypeResolution.cs" />
     <Compile Include="UnixTime.cs">
