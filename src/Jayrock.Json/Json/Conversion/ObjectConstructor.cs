@@ -34,6 +34,7 @@ namespace Jayrock.Json.Conversion
 
     public sealed class ObjectConstructor : IObjectConstructor
     {
+        private readonly Type _type;
         private readonly ConstructorInfo[] _ctors;
         
         private static readonly IComparer _arrayLengthComparer = new ReverseComparer(new DelegatingComparer(GetParametersCount));
@@ -59,9 +60,18 @@ namespace Jayrock.Json.Conversion
                 ctors = (ConstructorInfo[]) ctors.Clone();
             }
 
-            if (ctors.Length == 0)
-                throw new ArgumentException(null, "ctors");
+            if (type.IsClass && ctors.Length == 0)
+            {
+                //
+                // Value types are excluded here because they always have
+                // a default constructor available but one which does not
+                // show up in reflection.
+                //
 
+                throw new ArgumentException(null, "ctors");
+            }
+
+            _type = type;
             _ctors = ctors;
             Array.Sort(_ctors, _arrayLengthComparer);
         }
@@ -79,11 +89,27 @@ namespace Jayrock.Json.Conversion
             if (context == null) throw new ArgumentNullException("context");
             if (members == null) throw new ArgumentNullException("members");
 
-            foreach (ConstructorInfo ctor in _ctors)
+            if (_ctors.Length > 0)
             {
-                ObjectConstructionResult result = TryCreateObject(context, ctor, members);
-                if (result != null)
-                    return result;
+                foreach (ConstructorInfo ctor in _ctors)
+                {
+                    ObjectConstructionResult result = TryCreateObject(context, ctor, members);
+                    if (result != null)
+                        return result;
+                }
+            }
+
+            if (_type.IsValueType)
+            {
+                //
+                // Value types always have a default constructor available 
+                // but one which does not show up in reflection. If no other
+                // constructors matched then just use the default one.
+                //
+
+                object obj = Activator.CreateInstance(_type);
+                JsonReader tail = NamedJsonBuffer.ToObject(members).CreateReader();
+                return new ObjectConstructionResult(obj, tail);
             }
 
             throw new JsonException(string.Format("None constructor could be used to create {0} object from JSON.", _ctors[0].DeclaringType));

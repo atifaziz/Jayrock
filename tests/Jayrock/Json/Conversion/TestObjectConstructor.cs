@@ -203,5 +203,20 @@ namespace Jayrock.Tests.Json.Conversion
             public IDictionary Object { get { return _obj; } }
             public ConstructorInfo Constructor { get { return _ctor; } }
         }
+
+        [Test]
+        public void StructTypeWithDefaultConstructorConstruction()
+        {
+            ObjectConstructor constructor = new ObjectConstructor(typeof(StructThing));
+            ObjectConstructionResult result = constructor.CreateObject(new ImportContext(), JsonText.CreateReader("{foo:bar}"));
+            Assert.IsInstanceOfType(typeof(StructThing), result.Object);
+            JsonReader tail = result.TailReader;
+            tail.ReadToken(JsonTokenClass.Object);
+            Assert.AreEqual("foo", tail.ReadMember());
+            Assert.AreEqual("bar", tail.ReadString());
+            tail.ReadToken(JsonTokenClass.EndObject);
+        }
+
+        struct StructThing {}
     }
 }
