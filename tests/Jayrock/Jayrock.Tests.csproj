@@ -117,6 +117,7 @@
     <Compile Include="Json\Conversion\TestObjectConstructor.cs" />
     <Compile Include="Json\TestFreeJsonMemberReadingHelper.cs" />
     <Compile Include="Json\TestJsonText.cs" />
+    <Compile Include="Json\TestObjectSurrogateConstructor.cs" />
     <Compile Include="Reflection\TestReflector.cs" />
     <Compile Include="TestTypeResolution.cs" />
     <Compile Include="JsonML\TestJsonMLCodec.cs" />

@@ -334,6 +334,9 @@
     <Compile Include="Json\Conversion\JsonMemberNamingConventionAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\ObjectSurrogateConstructor.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Json\Conversion\ObjectConstructionResult.cs" />
     <Compile Include="Json\Conversion\ObjectConstructor.cs" />
     <Compile Include="Json\Conversion\PropertyCustomization.cs">
