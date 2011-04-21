@@ -160,6 +160,7 @@
     <Compile Include="Json\Conversion\AnyType.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Comparers.cs" />
     <Compile Include="Json\Conversion\Converters\AnyImporter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -306,6 +307,7 @@
     <Compile Include="Json\Conversion\ImporterListSectionHandler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\IObjectConstructor.cs" />
     <Compile Include="Json\Conversion\IObjectMemberExporter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -331,9 +333,11 @@
     <Compile Include="Json\Conversion\JsonMemberNamingConventionAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\ObjectConstructor.cs" />
     <Compile Include="Json\Conversion\PropertyCustomization.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\StockJsonBuffers.cs" />
     <Compile Include="Json\EmptyJsonWriter.cs">
       <SubType>Code</SubType>
     </Compile>

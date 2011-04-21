@@ -114,6 +114,7 @@
     <Compile Include="Json\Conversion\TestJsonConvert.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\TestObjectConstructor.cs" />
     <Compile Include="Json\TestFreeJsonMemberReadingHelper.cs" />
     <Compile Include="Json\TestJsonText.cs" />
     <Compile Include="Reflection\TestReflector.cs" />
