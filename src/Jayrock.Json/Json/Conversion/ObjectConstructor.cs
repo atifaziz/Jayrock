@@ -177,7 +177,7 @@ namespace Jayrock.Json.Conversion
 
         /// <remarks>
         /// Bound indicies returned in the resulting array are one-based
-        /// therefore zero mean unbound.
+        /// therefore zero means unbound.
         /// </remarks>
         
         private static int[] Bind(ImportContext context, ParameterInfo[] parameters, NamedJsonBuffer[] members)
