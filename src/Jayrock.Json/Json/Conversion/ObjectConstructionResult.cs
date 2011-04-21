@@ -22,12 +22,32 @@
 
 namespace Jayrock.Json.Conversion
 {
+    #region Imports
+
+    using System;
+
+    #endregion
+
     /// <summary>
-    /// Represents an object constructor.
+    /// Represents the object resulting from construction as well as
+    /// a tail holding any remainders.
     /// </summary>
 
-    public interface IObjectConstructor
+    public sealed class ObjectConstructionResult
     {
-        ObjectConstructionResult CreateObject(ImportContext context, JsonReader reader);
+        private readonly object _obj;
+        private readonly JsonReader _tail;
+
+        public ObjectConstructionResult(object obj, JsonReader tail)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (tail == null) throw new ArgumentNullException("tail");
+
+            _obj = obj;
+            _tail = tail;
+        }
+
+        public object Object { get { return _obj; } }
+        public JsonReader TailReader { get { return _tail; } }
     }
 }

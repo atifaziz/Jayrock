@@ -23,11 +23,11 @@
 namespace Jayrock.Json.Conversion
 {
     /// <summary>
-    /// Represents an object constructor.
+    /// Represents an object's surrogate constructor.
     /// </summary>
 
-    public interface IObjectConstructor
+    public interface IObjectSurrogateConstructor
     {
-        ObjectConstructionResult CreateObject(ImportContext context, JsonReader reader);
+        ObjectConstructionResult CreateObject(ImportContext context);
     }
 }

@@ -315,6 +315,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Json\Conversion\INonObjectMemberImporter.cs" />
+    <Compile Include="Json\Conversion\IObjectSurrogateConstructor.cs" />
     <Compile Include="Json\Conversion\JsonConvert.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -333,6 +334,7 @@
     <Compile Include="Json\Conversion\JsonMemberNamingConventionAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Json\Conversion\ObjectConstructionResult.cs" />
     <Compile Include="Json\Conversion\ObjectConstructor.cs" />
     <Compile Include="Json\Conversion\PropertyCustomization.cs">
       <SubType>Code</SubType>
