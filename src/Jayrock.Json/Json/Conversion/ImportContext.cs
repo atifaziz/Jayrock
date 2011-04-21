@@ -183,17 +183,7 @@ namespace Jayrock.Json.Conversion
                 !type.IsPrimitive && 
                 (type.IsValueType || type.GetConstructors().Length > 0))
             {
-                if (type.IsValueType)
-                {
-                    CustomTypeDescriptor logicalType = new CustomTypeDescriptor(type);
-                
-                    if (logicalType.GetProperties().Count > 0)
-                        return new ComponentImporter(type, logicalType);
-                }
-                else
-                {
-                    return new ComponentImporter(type, new ObjectConstructor(type));
-                }
+                return new ComponentImporter(type, new ObjectConstructor(type));
             }
 
             return null;
