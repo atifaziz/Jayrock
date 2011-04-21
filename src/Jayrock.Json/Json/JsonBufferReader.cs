@@ -85,6 +85,9 @@ namespace Jayrock.Json
         {
             if (EOF)
                 return JsonBuffer.Empty;
+
+            if (!_buffer.IsStructured)
+                return _buffer;
             
             JsonTokenClass tokenClass = TokenClass;
             if (tokenClass.IsTerminator || tokenClass == JsonTokenClass.Member)

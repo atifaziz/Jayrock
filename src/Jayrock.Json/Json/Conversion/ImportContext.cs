@@ -181,7 +181,7 @@ namespace Jayrock.Json.Conversion
             
             if ((type.IsPublic || type.IsNestedPublic) && 
                 !type.IsPrimitive && 
-                (type.IsValueType || type.GetConstructor(Type.EmptyTypes) != null))
+                (type.IsValueType || type.GetConstructors().Length > 0))
             {
                 if (type.IsValueType)
                 {
@@ -192,7 +192,7 @@ namespace Jayrock.Json.Conversion
                 }
                 else
                 {
-                    return new ComponentImporter(type);
+                    return new ComponentImporter(type, new ObjectConstructor(type));
                 }
             }
 
