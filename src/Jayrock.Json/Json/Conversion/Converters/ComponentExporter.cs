@@ -41,8 +41,9 @@ namespace Jayrock.Json.Conversion.Converters
             this(inputType, (ICustomTypeDescriptor) null) {}
 
         public ComponentExporter(Type inputType, ICustomTypeDescriptor typeDescriptor) :
-            this(inputType, typeDescriptor != null ? 
-                            typeDescriptor.GetProperties() : (new CustomTypeDescriptor(inputType)).GetProperties()) {}
+            this(inputType, typeDescriptor != null 
+                            ? typeDescriptor.GetProperties() 
+                            : (new CustomTypeDescriptor(inputType)).GetProperties()) {}
 
         private ComponentExporter(Type inputType, PropertyDescriptorCollection properties) : 
             base(inputType)
@@ -52,7 +53,7 @@ namespace Jayrock.Json.Conversion.Converters
             _properties = properties;
 
             int count = 0;
-            IObjectMemberExporter[] exporters = new IObjectMemberExporter[properties.Count];
+            IObjectMemberExporter[] exporters = null;
 
             for (int i = 0; i < properties.Count; i++)
             {
@@ -65,6 +66,9 @@ namespace Jayrock.Json.Conversion.Converters
 
                 if (exporter == null)
                     continue;
+
+                if (exporters == null) // fault
+                    exporters = new IObjectMemberExporter[properties.Count];
 
                 exporters[i] = exporter;
                 count++;
