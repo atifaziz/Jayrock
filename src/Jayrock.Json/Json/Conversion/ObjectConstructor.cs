@@ -36,8 +36,8 @@ namespace Jayrock.Json.Conversion
     {
         private readonly Type _type;
         private readonly ConstructorInfo[] _ctors;
-        
-        private static readonly IComparer _arrayLengthComparer = new ReverseComparer(new DelegatingComparer(GetParametersCount));
+
+        private static readonly IComparer _arrayLengthComparer = new ReverseComparer(new DelegatingComparer(new ComparableSelector(GetParametersCount)));
 
         public ObjectConstructor(Type type) : this(type, null) {}
 
