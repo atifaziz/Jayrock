@@ -34,6 +34,11 @@ namespace Jayrock.Json.Conversion.Converters
         protected NumberImporterBase(Type type) :
             base(type) {}
 
+        protected override object ImportNull(ImportContext context, JsonReader reader)
+        {
+            throw new JsonException(string.Format("JSON null cannot be imported as {0}.", OutputType.FullName));
+        }
+
         protected override object ImportFromString(ImportContext context, JsonReader reader)
         {
             return ImportFromNumber(context, reader);
