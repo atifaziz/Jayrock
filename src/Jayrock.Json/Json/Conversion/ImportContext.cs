@@ -186,6 +186,10 @@ namespace Jayrock.Json.Conversion
                 return new ComponentImporter(type, new ObjectConstructor(type));
             }
 
+            CustomTypeDescriptor anonymousClass = CustomTypeDescriptor.TryCreateForAnonymousClass(type);
+            if (anonymousClass != null)
+                return new ComponentImporter(type, anonymousClass, new ObjectConstructor(type));
+
             return null;
         }
 
