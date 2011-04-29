@@ -107,7 +107,7 @@ namespace Jayrock.Json.Conversion
             }
                         
             PropertyDescriptorCollection logicalProperties = new PropertyDescriptorCollection(null);
-            
+            bool immutable = true;
             int index = 0;
             
             foreach (MemberInfo member in members)
@@ -115,6 +115,7 @@ namespace Jayrock.Json.Conversion
                 FieldInfo field = member as FieldInfo;
                 string name = names != null && index < names.Length ? names[index] : null;
                 TypeMemberDescriptor descriptor = null;
+                bool writable;
 
                 if (field != null)
                 {
@@ -125,9 +126,12 @@ namespace Jayrock.Json.Conversion
             
                     if (field.DeclaringType != type && field.ReflectedType != type)
                         throw new ArgumentException(null, "members");
-                
-                    if (!field.IsInitOnly && !field.IsLiteral)
+
+                    writable = !field.IsInitOnly;
+                    if ((writable || immutable) && !field.IsLiteral)
+                    {
                         descriptor = new TypeFieldDescriptor(field, name);
+                    }
                 }
                 else
                 {
@@ -135,7 +139,7 @@ namespace Jayrock.Json.Conversion
                     
                     if (property == null)
                         throw new ArgumentException(null, "members");
-                    
+
                     //
                     // Add public properties that can be read and modified.
                     // If property is read-only yet has the JsonExport 
@@ -150,8 +154,10 @@ namespace Jayrock.Json.Conversion
                     if (property.DeclaringType != type && property.ReflectedType != type)
                         throw new ArgumentException(null, "members");
 
+                    writable = property.CanWrite;
+
                     if ((property.CanRead) &&
-                        (isAnonymousClass || property.CanWrite || property.IsDefined(typeof(JsonExportAttribute), true)) &&
+                        (writable || immutable || property.IsDefined(typeof(JsonExportAttribute), true)) &&
                         property.GetIndexParameters().Length == 0)
                     {
                         //
@@ -173,6 +179,13 @@ namespace Jayrock.Json.Conversion
                 if (descriptor != null)
                 {
                     descriptor.ApplyCustomizations();
+
+                    if (immutable && writable)
+                    {
+                        immutable = false;
+                        logicalProperties.Clear();
+                    }
+
                     logicalProperties.Add(descriptor);
                 }
                 

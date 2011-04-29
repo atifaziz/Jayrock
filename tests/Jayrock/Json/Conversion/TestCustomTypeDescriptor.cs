@@ -232,6 +232,16 @@ namespace Jayrock.Json.Conversion
             Assert.IsTrue(property.IsReadOnly);
         }
 
+        [ Test ]
+        public void ImmutableClassPropertiesExpected()
+        {
+            CustomTypeDescriptor descriptor = new CustomTypeDescriptor(typeof(ImmutableThing));
+            PropertyDescriptorCollection properties = descriptor.GetProperties();
+            Assert.AreEqual(2, properties.Count);
+            Assert.IsNotNull(properties["field"]);
+            Assert.IsNotNull(properties["property"]);
+        }
+
         private static void AddServiceToServiceContainer(IServiceContainer sc) 
         {
             object service = new object();
@@ -259,6 +269,20 @@ namespace Jayrock.Json.Conversion
             Assert.AreSame(service, sc.GetService(serviceType));
             sc.RemoveService(serviceType);
             Assert.IsNull(sc.GetService(serviceType));
+        }
+
+        public sealed class ImmutableThing
+        {
+            public readonly object Field;
+            
+            private object _property;
+            public object Property { get { return _property; } }
+
+            public ImmutableThing(object field, object property)
+            {
+                Field = field;
+                _property = property;
+            }
         }
 
         public sealed class Thing
