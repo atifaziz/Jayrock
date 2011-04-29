@@ -77,6 +77,7 @@ namespace Jayrock.Json.Conversion
             AssertInStock(typeof(StringExporter), typeof(Uri));
             AssertInStock(typeof(JsonNumberExporter), typeof(JsonNumber));
             AssertInStock(typeof(JsonBufferExporter), typeof(JsonBuffer));
+            AssertInStock(typeof(StringExporter), typeof(ThingWithConstructor));
             
             #if !NET_1_0 && !NET_1_1 
 
@@ -187,6 +188,11 @@ namespace Jayrock.Json.Conversion
         {
             public int Field1;
             public int Field2;
+        }
+
+        public class ThingWithConstructor
+        {
+            public ThingWithConstructor(object arg) { }
         }
     }
 }
