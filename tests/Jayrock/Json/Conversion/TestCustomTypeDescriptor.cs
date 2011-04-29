@@ -287,10 +287,10 @@ namespace Jayrock.Json.Conversion
 
         public sealed class Thing
         {
+            public readonly object ReadOnlyField = null;
             public object Field1;
             [ JsonIgnore ] public object Field2;
             public object Field3;
-            public readonly object ReadOnlyField = null;
 
             public object Property1 { get { return null; } set { } }
             [ JsonIgnore ] public object Property2 { get { return null; } set { } }
