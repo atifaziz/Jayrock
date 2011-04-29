@@ -55,12 +55,11 @@ namespace Jayrock.Json.Conversion
         private NamingConvention _convention;
         private UnderscoreConvention _underscores;
 
-        public JsonMemberNamingConventionAttribute() {}
+        public JsonMemberNamingConventionAttribute() :
+            this(NamingConvention.None) {}
 
-        public JsonMemberNamingConventionAttribute(NamingConvention convention)
-        {
-            _convention = convention;
-        }
+        public JsonMemberNamingConventionAttribute(NamingConvention convention) :
+            this(convention, UnderscoreConvention.None) {}
 
         public JsonMemberNamingConventionAttribute(NamingConvention naming, UnderscoreConvention underscores)
         {
@@ -74,7 +73,8 @@ namespace Jayrock.Json.Conversion
             set { _convention = value; }
         }
 
-        public UnderscoreConvention Underscores {
+        public UnderscoreConvention Underscores 
+        {
             get { return _underscores; }
             set { _underscores = value; }
         }

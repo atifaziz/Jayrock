@@ -62,7 +62,19 @@ namespace Jayrock.Json
             foreach (JsonTokenClass tokenClass in JsonTokenClass.All)
                 Assert.IsTrue(tokenClass.GetHashCode().Equals(tokenClass.Name.GetHashCode()));
         }
-        
+
+        [ Test ]
+        public void AllIsReadOnly()
+        {
+            Assert.IsTrue(((IList) JsonTokenClass.All).IsReadOnly);
+        }
+
+        [ Test ]
+        public void AllIsFixedSize()
+        {
+            Assert.IsTrue(((IList) JsonTokenClass.All).IsFixedSize);
+        }
+
         [ Test ]
         public void All()
         {

@@ -84,7 +84,7 @@ namespace Jayrock.Json.Conversion.Converters
 
         #if !NET_1_0 && !NET_1_1 && !NET_2_0
 
-        [Test]
+        [ Test ]
         public void ImportBigInteger()
         {
             AssertImport(System.Numerics.BigInteger.Pow(long.MaxValue, 3), "784637716923335095224261902710254454442933591094742482943");
@@ -92,7 +92,7 @@ namespace Jayrock.Json.Conversion.Converters
 
         #endif // !NET_1_0 && !NET_1_1 && !NET_2_0
 
-        [Test]
+        [ Test ]
         public void ImportDecimalUsingExponentialNotation()
         {
             //
@@ -101,6 +101,14 @@ namespace Jayrock.Json.Conversion.Converters
             //
 
             AssertImport(7.25e-5m, "7.25e-005");
+        }
+
+        [ Test, ExpectedException(typeof(JsonException)) ]
+        public void CannotImportNull()
+        {
+            ImportContext importContext = new ImportContext();
+            JsonTextReader reader = new JsonTextReader(new StringReader("null"));
+            new Int32Importer().Import(importContext, reader);
         }
 
         private static void AssertImport(object expected, string input)
