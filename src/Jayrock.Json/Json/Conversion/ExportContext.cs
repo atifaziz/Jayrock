@@ -211,7 +211,6 @@ namespace Jayrock.Json.Conversion
                     exporters.Add(new DataTableExporter());
                     exporters.Add(new DataRowExporter());
                     exporters.Add(new DbDataRecordExporter());
-                    exporters.Add(new ControlExporter());
                     exporters.Add(new StringExporter(typeof(Uri)));
                     exporters.Add(new StringExporter(typeof(Guid)));
 

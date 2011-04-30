@@ -155,9 +155,6 @@
     <Compile Include="Json\Conversion\Converters\TestComponentImporter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Json\Conversion\Converters\TestControlExporter.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Json\Conversion\Converters\TestDataSetExporter.cs" />
     <Compile Include="Json\Conversion\Converters\TestDataTableExporter.cs" />
     <Compile Include="Json\Conversion\Converters\TestDateTimeExporter.cs">

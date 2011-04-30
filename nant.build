@@ -261,7 +261,6 @@
                 <include name="System.Data.dll" />
                 <include name="System.Numerics.dll" />
                 <include name="System.Xml.dll" />
-                <include name="System.Web.dll" />
             </references>
             <nowarn>
                 <warning number="618" />
@@ -342,7 +341,6 @@
                 <include name="System.Data.dll" />
                 <include name="System.Numerics.dll" />
                 <include name="System.Xml.dll" />
-                <include name="System.Web.dll" />
                 <include name="System.Web.dll" />
                 <include name="${jayrock.json.dll.path}" />
                 <include name="${jayrock.dll.path}" />

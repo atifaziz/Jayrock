@@ -60,9 +60,6 @@ namespace Jayrock.Json.Conversion
             AssertInStock(typeof(ExportAwareExporter), typeof(JsonArray));
             AssertInStock(typeof(EnumerableExporter), typeof(ArrayList));
             AssertInStock(typeof(ExportAwareExporter), typeof(ExportableThing));
-            AssertInStock(typeof(ControlExporter), typeof(Control));
-            AssertInStock(typeof(ControlExporter), typeof(HtmlControl));
-            AssertInStock(typeof(ControlExporter), typeof(HtmlImage));
             AssertInStock(typeof(DataSetExporter), typeof(DataSet));
             AssertInStock(typeof(DataSetExporter), typeof(MyDataSet));
             AssertInStock(typeof(DataTableExporter), typeof(DataTable));
