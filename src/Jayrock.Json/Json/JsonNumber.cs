@@ -153,6 +153,11 @@ namespace Jayrock.Json
             return System.Numerics.BigInteger.Parse(Value, NumberStyles.Integer, provider);
         }
 
+        public static explicit operator System.Numerics.BigInteger(JsonNumber number)
+        {
+            return number.ToBigInteger();
+        }
+
         #endif // !NET_1_0 && !NET_1_1 && !NET_2_0
 
         public DateTime ToDateTime()
