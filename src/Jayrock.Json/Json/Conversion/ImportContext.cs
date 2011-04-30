@@ -229,6 +229,7 @@ namespace Jayrock.Json.Conversion
                     importers.Add(new DictionaryImporter());
                     importers.Add(new ListImporter());
                     importers.Add(new NameValueCollectionImporter());
+                    importers.Add(new JsonBufferImporter());
 
                     #if !NET_1_0 && !NET_1_1 && !NET_2_0
 

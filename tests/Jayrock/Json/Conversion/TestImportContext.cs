@@ -63,6 +63,7 @@ namespace Jayrock.Json.Conversion
             AssertInStock(typeof(NameValueCollectionImporter), typeof(NameValueCollection));
             AssertInStock(typeof(ComponentImporter), typeof(ValueThing));
             AssertInStock(typeof(UriImporter), typeof(Uri));
+            AssertInStock(typeof(JsonBufferImporter), typeof(JsonBuffer));
 
             #if !NET_1_0 && !NET_1_1 
 
