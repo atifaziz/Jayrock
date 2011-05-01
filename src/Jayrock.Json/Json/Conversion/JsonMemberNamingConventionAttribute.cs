@@ -28,6 +28,7 @@ namespace Jayrock.Json.Conversion
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Text;
 
     #endregion
 
@@ -84,41 +85,57 @@ namespace Jayrock.Json.Conversion
             if (property == null) 
                 throw new ArgumentNullException("property");
 
-            if (Convention == NamingConvention.None && Underscores == UnderscoreConvention.None)
+            NamingConvention naming = Convention;
+            UnderscoreConvention underscoring = Underscores;
+            if (naming == NamingConvention.None && underscoring == UnderscoreConvention.None)
                 return;
+            SetName(property, FormatName(FormatName(property.Name, underscoring), naming));
+        }
 
-            string name = property.Name;
-
-            switch (Underscores)
+        private static string FormatName(string name, UnderscoreConvention underscoring)
+        {
+            switch (underscoring)
             {
                 case UnderscoreConvention.Prefix:
-                    if (name.Length > 0 && name[0] != '_')
-                        name = '_' + name;
-                    break;
+                    return name.Length > 0 && name[0] != '_'
+                         ? '_' + name : name;
                 case UnderscoreConvention.Separate:
+                    StringBuilder sb = null;
                     for (int i = 1; i < name.Length; ++i)
                     {
-                        if (char.IsUpper(name[i])) {
-                            name = name.Substring(0, i) + '_' + name.Substring(i);
-                            ++i;
+                        char ch = name[i];
+                        if (char.IsUpper(ch))
+                        {
+                            if (sb == null)
+                            {
+                                sb = new StringBuilder();
+                                sb.Append(name, 0, i);
+                            }
+                            sb.Append('_');
                         }
+                        if (sb != null) sb.Append(ch);
                     }
-                    break;
+                    return sb != null ? sb.ToString() : name;
+                default:
+                    return name;
             }
+        }
 
-            switch (Convention)
+        private static string FormatName(string name, NamingConvention naming)
+        {
+            switch (naming)
             {
                 case NamingConvention.Pascal:
-                    name = char.ToUpper(name[0], CultureInfo.InvariantCulture) + name.Substring(1); break;
+                    return char.ToUpper(name[0], CultureInfo.InvariantCulture) + name.Substring(1);
                 case NamingConvention.Camel:
-                    name = char.ToLower(name[0], CultureInfo.InvariantCulture) + name.Substring(1); break;
+                    return char.ToLower(name[0], CultureInfo.InvariantCulture) + name.Substring(1);
                 case NamingConvention.Upper:
-                    name = name.ToUpper(CultureInfo.InvariantCulture); break;
+                    return name.ToUpper(CultureInfo.InvariantCulture);
                 case NamingConvention.Lower:
-                    name = name.ToLower(CultureInfo.InvariantCulture); break;
+                    return name.ToLower(CultureInfo.InvariantCulture);
+                default:
+                    return name;
             }
-
-            SetName(property, name);
         }
 
         private static void SetName(PropertyDescriptor property, string name)

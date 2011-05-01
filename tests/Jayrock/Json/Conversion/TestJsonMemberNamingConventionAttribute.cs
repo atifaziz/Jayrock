@@ -61,7 +61,8 @@ namespace Jayrock.Json.Conversion
         }
 
         [Test]
-        public void SetConvention() {
+        public void SetConvention() 
+        {
             JsonMemberNamingConventionAttribute attribute = new JsonMemberNamingConventionAttribute();
             Assert.AreEqual(NamingConvention.None, attribute.Convention);
             attribute.Convention = NamingConvention.Pascal;
@@ -69,7 +70,8 @@ namespace Jayrock.Json.Conversion
         }
 
         [Test]
-        public void SetUnderscores() {
+        public void SetUnderscores() 
+        {
             JsonMemberNamingConventionAttribute attribute = new JsonMemberNamingConventionAttribute();
             Assert.AreEqual(UnderscoreConvention.None, attribute.Underscores);
             attribute.Underscores = UnderscoreConvention.Separate;
@@ -144,7 +146,8 @@ namespace Jayrock.Json.Conversion
         }
 
         [Test]
-        public void UnderscorePrefixApplication() {
+        public void UnderscorePrefixApplication() 
+        {
             TestNamingCase("FooBarBaz", NamingConvention.Camel, UnderscoreConvention.Prefix, "_FooBarBaz");
             TestNamingCase("FooBarBaz", NamingConvention.Pascal, UnderscoreConvention.Prefix, "_FooBarBaz");
             TestNamingCase("FooBarBaz", NamingConvention.Upper, UnderscoreConvention.Prefix, "_FOOBARBAZ");
@@ -152,11 +155,13 @@ namespace Jayrock.Json.Conversion
         }
 
         [Test]
-        public void UnderscoreSeparatorApplication() {
+        public void UnderscoreSeparatorApplication() 
+        {
             TestNamingCase("FooBarBaz", NamingConvention.Camel, UnderscoreConvention.Separate, "foo_Bar_Baz");
             TestNamingCase("FooBarBaz", NamingConvention.Pascal, UnderscoreConvention.Separate, "Foo_Bar_Baz");
             TestNamingCase("FooBarBaz", NamingConvention.Upper, UnderscoreConvention.Separate, "FOO_BAR_BAZ");
             TestNamingCase("FooBarBaz", NamingConvention.Lower, UnderscoreConvention.Separate, "foo_bar_baz");
+            TestNamingCase("foobarbaz", NamingConvention.None, UnderscoreConvention.Separate, "foobarbaz");
         }
 
         private static void TestNamingCase(string baseName, NamingConvention testCase, UnderscoreConvention testUnder, string expected) 
