@@ -140,18 +140,29 @@ namespace Jayrock.Json
             return GetEnumerator();
         }
 
-#if !NET_1_0 && !NET_1_1
+        #if !NET_1_0 && !NET_1_1
+
+        public JsonObject(IEnumerable<JsonMember> members)
+        {
+            if (members == null)
+                return;
+
+            foreach (JsonMember member in members)
+                Accumulate(member.Name, member.Value);
+        }
+
         IEnumerator<JsonMember> IEnumerable<JsonMember>.GetEnumerator()
         {
             return GetEnumerator();
         }
-#endif
+        
+        #endif
 
         [Serializable]
         public sealed class JsonMemberEnumerator : IEnumerator, IDisposable
-#if !NET_1_0 && !NET_1_1
+            #if !NET_1_0 && !NET_1_1
             , IEnumerator<JsonMember>
-#endif
+            #endif
         {
             private JsonObject _obj;
             private IEnumerator _enumerator;

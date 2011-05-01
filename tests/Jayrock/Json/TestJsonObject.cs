@@ -40,6 +40,7 @@ namespace Jayrock.Json
     #if !NET_1_0 && !NET_1_1 && !NET_2_0
 
     using System.Dynamic;
+    using System.Linq;
     using System.Linq.Expressions;
     using Microsoft.CSharp.RuntimeBinder;
 
@@ -639,6 +640,30 @@ namespace Jayrock.Json
             Assert.AreEqual(obj.GetEnumerator().GetType(), ((IEnumerable) obj).GetEnumerator().GetType());
         }
 
+        #if !NET_2_0
+
+        [ Test ]
+        public void InitWithJsonMemberSequence()
+        {
+            JsonObject obj = new JsonObject(
+                from i in Enumerable.Range(0, 10)
+                let ch = (char)('a' + i)
+                select new JsonMember(ch.ToString(), i));
+            
+            Assert.AreEqual(10, obj.Count);
+            Assert.AreEqual(0, obj["a"]);
+            Assert.AreEqual(1, obj["b"]);
+            Assert.AreEqual(2, obj["c"]);
+            Assert.AreEqual(3, obj["d"]);
+            Assert.AreEqual(4, obj["e"]);
+            Assert.AreEqual(5, obj["f"]);
+            Assert.AreEqual(6, obj["g"]);
+            Assert.AreEqual(7, obj["h"]);
+            Assert.AreEqual(8, obj["i"]);
+            Assert.AreEqual(9, obj["j"]);
+        }
+
+        #endif // !NET_2_0
         #endif // !NET_1_0 && !NET_1_1
     }
 }
