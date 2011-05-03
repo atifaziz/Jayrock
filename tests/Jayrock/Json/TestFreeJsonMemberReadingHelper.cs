@@ -179,8 +179,7 @@ namespace Jayrock.Json
         [ Test, ExpectedException(typeof(JsonException)) ]
         public void CannotTailReadEmptySource()
         {
-            JsonReader tail = CreateHelper(string.Empty).GetTailReader();
-            Assert.IsFalse(tail.Read());
+            CreateHelper(string.Empty).GetTailReader();
         }
 
         [ Test, ExpectedException(typeof(JsonException)) ]
