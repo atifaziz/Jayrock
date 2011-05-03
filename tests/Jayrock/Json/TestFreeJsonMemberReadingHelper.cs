@@ -183,6 +183,12 @@ namespace Jayrock.Json
         }
 
         [ Test, ExpectedException(typeof(JsonException)) ]
+        public void CannotTailReadOnArray()
+        {
+            CreateHelper("[]").GetTailReader();
+        }
+
+        [Test, ExpectedException(typeof(JsonException))]
         public void CannotReadMemberOnArray()
         {
             CreateHelper("[]").ReadMember("foo");
