@@ -61,7 +61,7 @@ namespace Jayrock.JsonRpc.Web
 
         private static void WriteProlog(IndentedTextWriter writer)
         {
-            writer.WriteLine("import simplejson");
+            writer.WriteLine("import json");
             writer.WriteLine("import urllib");
             writer.WriteLine();
         }
@@ -155,7 +155,7 @@ namespace Jayrock.JsonRpc.Web
         {
             writer.WriteLine(@"def __call(self, method, params):
         self.__id = self.__id + 1
-        response = simplejson.loads(urllib.urlopen(self.url, urllib.urlencode([('JSON-RPC', simplejson.dumps({ 'id' : self.__id, 'method' : method, 'params' : params }))])).read())
+        response = json.loads(urllib.urlopen(self.url, urllib.urlencode([('JSON-RPC', json.dumps({ 'id' : self.__id, 'method' : method, 'params' : params }))])).read())
         if response.has_key('error'): raise Error(None, response)
         return response['result']
 ");
