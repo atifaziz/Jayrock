@@ -199,6 +199,14 @@ namespace Jayrock.Json
                         @"Unexpected EOF while attempting to look for member named '{0}'.",
                         name));
                 }
+
+                JsonTokenClass clazz = reader.TokenClass;
+                if (clazz != JsonTokenClass.Object &&
+                    clazz != JsonTokenClass.Member)
+                {
+                    throw new JsonException(string.Format(
+                        @"Found {0} where a JSON Object or Member was expected.", clazz));
+                }
             }
 
             //
