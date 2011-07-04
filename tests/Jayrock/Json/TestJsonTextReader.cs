@@ -766,6 +766,34 @@ namespace Jayrock.Json
             AssertTokenText(JsonTokenClass.Number, "1.79769313486232e+308");
             AssertEOF();
         }
+        [ Test ]
+        public void ReadPositionsAfterEof()
+        {
+            JsonTextReader reader = new JsonTextReader(new StringReader("[ \nhello ]"));
+            while (reader.Read()) { /* NOP */ }
+            Assert.AreEqual(2, reader.LineNumber, "Line number");
+            Assert.AreEqual(7, reader.LinePosition, "Line position");
+            Assert.AreEqual(10, reader.CharCount, "Character count");
+        }
+
+        [ Test ]
+        public void ReadTwoJsonTextsFromSameString()
+        {
+            const string json = @"{foo:bar/*baz*/}[foo,bar]";
+            JsonTextReader reader = _reader = new JsonTextReader(new StringReader(json));
+            AssertToken(JsonTokenClass.Object);
+            AssertTokenText(JsonTokenClass.Member, "foo");
+            AssertTokenText(JsonTokenClass.String, "bar");
+            AssertToken(JsonTokenClass.EndObject);
+            AssertEOF();
+            Assert.AreEqual(16, reader.CharCount);
+            _reader = new JsonTextReader(new StringReader(json.Substring(reader.CharCount)));
+            AssertToken(JsonTokenClass.Array);
+            AssertTokenText(JsonTokenClass.String, "foo");
+            AssertTokenText(JsonTokenClass.String, "bar");
+            AssertToken(JsonTokenClass.EndArray);
+            AssertEOF();
+        }
 
         private void AssertTokenText(JsonTokenClass token, string text)
         {
