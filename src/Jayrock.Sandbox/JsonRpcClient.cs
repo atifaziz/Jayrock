@@ -109,10 +109,21 @@ namespace Jayrock.JsonRpc
                 return OnResponse(JsonText.CreateReader(reader), returnType);
         }
 
-        private object OnResponse(JsonReader reader, Type returnType)
+        public object OnResponse(JsonReader reader, Type returnType)
         {
             Debug.Assert(reader != null);
             Debug.Assert(returnType != null);
+
+            bool resultSpecified = false;
+            object result = null;
+
+            //
+            // JSON-RPC 2.0 specification/protocol, states that either error 
+            // or result must be present but not both. JSON-RPC 1.0 is less 
+            // strict and states that one or the other must be null. There 
+            // is an ambiguity however with 1.0 when both result and error 
+            // are null. Here, it is treated like a successful null result.
+            //
 
             NamedJsonBuffer[] members = JsonBuffer.From(reader).GetMembersArray();
             foreach (NamedJsonBuffer member in members)
@@ -125,13 +136,17 @@ namespace Jayrock.JsonRpc
                 }
                 else if (string.CompareOrdinal(member.Name, "result") == 0)
                 {
-                    return returnType != typeof(JsonBuffer) 
-                         ? JsonConvert.Import(returnType, member.Buffer.CreateReader()) 
-                         : member.Buffer;
+                    resultSpecified = true;
+                    result = returnType != typeof(JsonBuffer) 
+                           ? JsonConvert.Import(returnType, member.Buffer.CreateReader()) 
+                           : member.Buffer;
                 }
             }
 
-            throw new Exception("Invalid JSON-RPC response. It contains neither a result nor an error.");
+            if (!resultSpecified) // never gets here on error
+                throw new Exception("Invalid JSON-RPC response. It contains neither a result nor an error.");
+            
+            return result;
         }
 
         protected virtual void OnError(object errorObject) 
