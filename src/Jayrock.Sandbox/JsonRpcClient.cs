@@ -26,6 +26,7 @@ namespace Jayrock.JsonRpc
 
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
     using System.Net;
@@ -39,7 +40,37 @@ namespace Jayrock.JsonRpc
     public class JsonRpcClient : HttpWebClientProtocol
     {
         private int _id;
+        private string[] _jsonRpcMediaTypes;
+
         private static readonly object[] _zeroArgs = new object[0];
+
+        public string[] JsonRpcMediaTypes
+        {
+            get
+            {
+                if (_jsonRpcMediaTypes == null)
+                {
+                    return new string[]
+                    {
+                        "application/json", 
+                        "application/json-rpc", 
+                        "application/jsonrequest"
+                    };                    
+                }
+                
+                return (string[]) _jsonRpcMediaTypes.Clone();
+            }
+            
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                _jsonRpcMediaTypes = value.Length > 0 
+                                   ? (string[]) value.Clone() 
+                                   : value;
+            }
+        }
 
         public object Invoke(string method)
         {
@@ -92,9 +123,16 @@ namespace Jayrock.JsonRpc
 
             WebRequest request = GetWebRequest(new Uri(Url));
             request.Method = "POST";
-            
+
+            Encoding requestEncoding = RequestEncoding;
+            if (requestEncoding == null)
+                requestEncoding = Encoding.UTF8;
+
+            request.ContentType = RequestMediaType
+                                + "; charset=" + requestEncoding.HeaderName;
+
             using (Stream stream = request.GetRequestStream())
-            using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(stream, requestEncoding))
             {
                 JsonObject call = new JsonObject();
                 call["id"] = ++_id;
@@ -107,6 +145,17 @@ namespace Jayrock.JsonRpc
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                 return OnResponse(JsonText.CreateReader(reader), returnType);
+        }
+
+        private string RequestMediaType
+        {
+            get
+            {
+                string[] types = _jsonRpcMediaTypes;
+                string type = types != null && types.Length > 0 ? types[0] : null;
+                type = Mask.NullString(type).Trim();
+                return Mask.EmptyString(type, "application/json");
+            }
         }
 
         public object OnResponse(JsonReader reader, Type returnType)
