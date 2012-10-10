@@ -125,7 +125,7 @@ namespace Jayrock.JsonRpc
 
             Encoding requestEncoding = RequestEncoding;
             if (requestEncoding == null)
-                requestEncoding = Encoding.UTF8;
+                requestEncoding = new UTF8Encoding(false);
 
             request.ContentType = RequestMediaType
                                 + "; charset=" + requestEncoding.HeaderName;
