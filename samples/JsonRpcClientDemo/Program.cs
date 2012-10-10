@@ -48,8 +48,8 @@ namespace JsonRpcClientDemo
             Console.WriteLine(string.Join(Environment.NewLine, (string[]) (new ArrayList((ICollection) client.Invoke("system.listMethods"))).ToArray(typeof(string))));
             Console.WriteLine(client.Invoke("now"));
             Console.WriteLine(((DateTime)client.Invoke(typeof(DateTime), "now")).ToString("r"));
-            Console.WriteLine(client.InvokeVargs("sum", 123, 456));
-            Console.WriteLine(client.Invoke("sum", new JsonObject { { "a", 123 }, { "b", 456 } }));
+            Console.WriteLine(client.InvokeVargs("add", 123, 456));
+            Console.WriteLine(client.Invoke("add", new JsonObject { { "a", 123 }, { "b", 456 } }));
             Console.WriteLine(client.InvokeVargs("total", new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
             client.CookieContainer = new CookieContainer();
             Console.WriteLine(client.Invoke("counter"));
