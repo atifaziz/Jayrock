@@ -35,17 +35,17 @@ namespace Jayrock.Json.Conversion.Converters
     {
         private static readonly string[] _formats = new string[] 
         { 
-            "yyyy-MM-dd'T'HH:mm:ss.fffffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.ffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.fffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.ffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.fzzz", 
-            "yyyy-MM-dd'T'HH:mm:sszzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.fffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.ffffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.ffffffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.fffffffffzzz", 
-            "yyyy-MM-dd'T'HH:mm:ss.ffffffffffzzz",
+            "yyyy-MM-dd'T'HH:mm:ss.fffffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.fK", 
+            "yyyy-MM-dd'T'HH:mm:ssK", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.fffffffffK", 
+            "yyyy-MM-dd'T'HH:mm:ss.ffffffffffK",
             "yyyy-MM-dd", 
         };
 
