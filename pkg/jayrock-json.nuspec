@@ -14,11 +14,11 @@
         <tags>json</tags>
     </metadata>
     <files>
-        <file src="lib\net2\Jayrock.Json.dll" target="lib\net2\Jayrock.Json.dll" />
-        <file src="lib\net2\Jayrock.Json.pdb" target="lib\net2\Jayrock.Json.pdb" />
-        <file src="lib\net4\Jayrock.Json.dll" target="lib\net4\Jayrock.Json.dll" />
-        <file src="lib\net4\Jayrock.Json.pdb" target="lib\net4\Jayrock.Json.pdb" />
-        <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
-        <file src="COPYING.txt" target="COPYING.txt" />
+        <file src="..\bin\net-2.0\release\Jayrock.Json.*" target="lib\net20" />
+        <file src="..\bin\net-4.0\release\Jayrock.Json.*" target="lib\net40" />
+        <file src="..\src\Common\**\*.cs" target="src\Common" />
+        <file src="..\src\Jayrock.Json\**\*.cs" target="src\Jayrock.Json" />
+        <file src="..\COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
+        <file src="..\COPYING.txt" target="COPYING.txt" />
     </files>
 </package>
