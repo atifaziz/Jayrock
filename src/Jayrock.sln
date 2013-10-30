@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\pkg\jayrock-json.nuspec = ..\pkg\jayrock-json.nuspec
 		..\pkg\jayrock.nuspec = ..\pkg\jayrock.nuspec
 		..\nant.build = ..\nant.build
+		..\pack.cmd = ..\pack.cmd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jayrock", "Jayrock\Jayrock.csproj", "{A178A4BB-CE12-4BF3-8B17-6DF0D82120C8}"
