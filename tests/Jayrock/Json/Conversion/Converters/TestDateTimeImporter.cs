@@ -135,7 +135,7 @@ namespace Jayrock.Json.Conversion.Converters
         [Test(Description = @"http://code.google.com/p/jayrock/issues/detail?id=54")]
         public void ImportZulu()
         {
-            var time = JsonConvert.Import<DateTime>("'2013-10-29T11:04:09.144Z'").ToUniversalTime();
+            DateTime time = JsonConvert.Import<DateTime>("'2013-10-29T11:04:09.144Z'").ToUniversalTime();
             Assert.AreEqual(new DateTime(2013, 10, 29, 11, 04, 09, 144), time);
         }
 
