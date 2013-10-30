@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>jayrock-json</id>
-        <version>0.9.12915</version>
+        <version>0.9.16530</version>
         <title>Jayrock JSON</title>
         <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>

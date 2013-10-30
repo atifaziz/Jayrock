@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>jayrock</id>
-        <version>0.9.12915</version>
+        <version>0.9.16530</version>
         <title>Jayrock</title>
         <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>
@@ -13,7 +13,7 @@
         <language>en-US</language>
         <tags>json rpc ajax services</tags>
         <dependencies>
-            <dependency id="jayrock-json" version="0.9.12915" />
+            <dependency id="jayrock-json" version="0.9.16530" />
         </dependencies>
     </metadata>
     <files>
