@@ -1,7 +1,11 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E56A19C5-D19A-41DE-8870-9E795B17E1B6}"
 	ProjectSection(SolutionItems) = preProject
+		..\pkg\jayrock-json.nuspec = ..\pkg\jayrock-json.nuspec
+		..\pkg\jayrock.nuspec = ..\pkg\jayrock.nuspec
 		..\nant.build = ..\nant.build
 	EndProjectSection
 EndProject
