@@ -4,10 +4,15 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E56A19C5-D19A-41DE-8870-9E795B17E1B6}"
 	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\buildw.cmd = ..\buildw.cmd
+		..\COPYING.LESSER.txt = ..\COPYING.LESSER.txt
+		..\COPYING.txt = ..\COPYING.txt
 		..\pkg\jayrock-json.nuspec = ..\pkg\jayrock-json.nuspec
 		..\pkg\jayrock.nuspec = ..\pkg\jayrock.nuspec
 		..\nant.build = ..\nant.build
 		..\pack.cmd = ..\pack.cmd
+		..\README.html = ..\README.html
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jayrock", "Jayrock\Jayrock.csproj", "{A178A4BB-CE12-4BF3-8B17-6DF0D82120C8}"
