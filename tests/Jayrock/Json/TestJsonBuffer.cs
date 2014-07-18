@@ -417,6 +417,14 @@ namespace Jayrock.Json
             Assert.IsTrue(buffer2.IsObject);
         }
 
+        [Test(Description = @"http://code.google.com/p/jayrock/issues/detail?id=57")]
+        public void Issue57()
+        {
+            int maxDepth = new JsonBufferWriter().MaxDepth + 1;
+            string json = new string('[', maxDepth) + new string(']', maxDepth);
+            JsonBuffer.From(json);
+        }
+
         private static void AssertBufferedValueScalarOrNull(JsonToken expected, JsonBufferWriter writer) 
         {
             JsonBuffer buffer = writer.GetBuffer();

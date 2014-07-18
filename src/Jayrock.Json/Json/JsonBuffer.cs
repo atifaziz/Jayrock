@@ -117,6 +117,7 @@ namespace Jayrock.Json
                               || reader.TokenClass == JsonTokenClass.Object;
 
             JsonBufferWriter writer = new JsonBufferWriter();
+            writer.MaxDepth = reader.MaxDepth; 
             writer.WriteFromReader(reader);
             JsonBuffer buffer = writer.GetBuffer();
 
