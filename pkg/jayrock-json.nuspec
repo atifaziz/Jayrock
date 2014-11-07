@@ -2,16 +2,17 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>jayrock-json</id>
-        <version>0.9.16530</version>
+        <version>0.9.16530.1</version>
         <title>Jayrock JSON</title>
         <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>
         <licenseUrl>http://www.opensource.org/licenses/lgpl-3.0.html</licenseUrl>
-        <projectUrl>http://jayrock.berlios.de/</projectUrl>
+        <projectUrl>http://jayrock.googlecode.com/</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Jayrock JSON is a versatile JSON parser, formatter and converter for Microsoft .NET Framework.</description>
         <language>en-US</language>
         <tags>json</tags>
+        <releaseNotes>Project URL change</releaseNotes>
     </metadata>
     <files>
         <file src="..\bin\net-2.0\release\Jayrock.Json.*" target="lib\net20" />
