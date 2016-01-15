@@ -103,10 +103,10 @@ available on the build machine:
 
 ### Compiling with Microsoft Visual Studio
 
-Jayrock comes with [Microsoft Visual Studio 2010][vs] project and solution
-files that compile assemblies for Microsoft .NET Framework 4.0. There is little
-to know except open the desired solution in Visual Studio and build away! The
-two solutions that you will find under src and tests are:
+Jayrock comes with [Microsoft Visual Studio][vs] project and solution files
+that compile assemblies for Microsoft .NET Framework 4.0. There is little to
+know except open the desired solution in Visual Studio and build away! The two
+solutions that you will find under src and tests are:
 
 * **Jayrock**: The complete solution that includes and builds the JSON-RPC,
   JSON and some experimental sandbox (playground) bits.
@@ -182,16 +182,11 @@ further development? Then [Jayrock Google Group][discuss] is the place to go.
 
 ## Setting Up Jayrock
 
-1.  Open the Microsoft Visual Studio 2008 solution file called `Jayrock Web`
-    under `src` and build the entire solution to compile all contained projects.
-    There is also a [NAnt][nant] build script but this builds all other
-    projects except the web project. If you compile from the command-line, the
-    only additional step required at the moment is to manually copy the
-    resulting `Jayrock.dll` and `Jayrock.Json.dll` assemblies from one of the
-    `bin` sub-directories (depending on the target platform and desired
-    configuration) to the bin directory under `www`.
+1.  Open the Microsoft Visual Studio solution file called `Samples.sln`
+    under `samples` and build the entire solution to compile all contained
+    projects.
 
-1.  Select the `Demo.ashx` in the `www` Web Site project and then choose
+1.  Select `Demo.ashx` in the `AspNetDemo` Web Site project and then choose
     **View in Browser** from the file's context menu.
 
 ## ASP.NET Quick Start
